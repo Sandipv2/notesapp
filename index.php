@@ -4,27 +4,12 @@
 if(isset($_COOKIE['isBlock'])) {
     die(readfile("blockHome.html"));
 }
-
-$server = "localhost";
-$username = "root";
-$password = "";
-$database = "notes";
-
 $insert = false;
 $update = false;
 $delete = false;
 
-$conn = mysqli_connect($server, $username, $password, $database);
-if (!$conn) {
-    echo "
-    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
-    <strong>Error!</strong> Could not connect to the database.
-    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button>
-  </div>
-  ";
-}
+require "_dbconnect.php";
+
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $delete = true;
@@ -81,23 +66,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body id="body">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Notes</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">GitHub</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    
+    <?php
+        require "./components/_navbar.php";
+    ?>
 
     <a href="blockuser.php">
         <button class="btn btn-danger" onclick = blockuser()>Block Me</button>
