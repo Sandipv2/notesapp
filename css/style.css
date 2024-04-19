@@ -1,0 +1,31 @@
+body {
+    background-color: #000b2a;
+    color: white;
+}
+
+input,textarea {
+    background-color: #132b3f!important;
+    color: white!important;
+}
+
+#myTable_wrapper,table {
+    margin-top: 25px;
+    color: white!important;
+}
+
+.dt-length label {
+    margin-left: 10px;
+}
+
+#action_col {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.alert {
+    transition-duration: 1s;
+}
+
+.dt-input option {
+    background-color: #000b2a;
+}
