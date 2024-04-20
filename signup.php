@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- My style -->
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>Sign Up</title>
 </head>
 
 <body>
@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="signup.php" method="POST">
             <div class="form-group">
                 <label for="username">Username</label>
-                <input required type="text" class="form-control" name="username" id="username" aria-describedby="emailHelp">
+                <input required type="text" class="form-control" name="username" id="username">
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
@@ -96,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-primary">Create Account</button>
         </form>
     </div>
+    <?php require "./components/_blockBtn.php"?>
 </body>
 
 </html>
