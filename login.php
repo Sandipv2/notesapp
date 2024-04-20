@@ -79,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
-    <?php require "./components/_blockBtn.php"?>
 </body>
 
 </html>
