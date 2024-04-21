@@ -45,14 +45,20 @@ session_start();
     <?php require "./components/_navbar.php" ?>
     <div class="container">
         <h1 class="text-center mt-5">Make Your <span>Notes</span> NOW</h1>
-        <div class="sign-btn">
-            <a href="login.php">
-                <button class="btn btn-success">LOGIN</button>
-            </a>
-            <a href="signup.php">
-                <button class="btn btn-outline-success">SIGN UP</button>
-            </a>
-        </div>
+        <?php
+            if(!isset($_SESSION["username"])) {
+                echo "
+                <div class='sign-btn'>
+                    <a href='login.php'>
+                        <button class='btn btn-success'>LOGIN</button>
+                    </a>
+                    <a href='signup.php'>
+                        <button class='btn btn-outline-success'>SIGN UP</button>
+                    </a>
+                </div>
+                ";
+            }
+        ?>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
