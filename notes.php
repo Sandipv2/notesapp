@@ -20,6 +20,7 @@ if (isset($_GET['delete'])) {
     $delete = true;
     $sql = "DELETE FROM `notes` WHERE `id` = $id";
     $result = mysqli_query($conn, $sql);
+    header("location:notes.php");
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
