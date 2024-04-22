@@ -116,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     ?>
 
-    <div class="container mt-4">
+    <div class="container mt-3">
         <form action="notes.php" method="post">
             <input type="hidden" id="editId" name="editId">
             <div class="form-group">

@@ -4,6 +4,11 @@ $home = false;
 $login = false;
 $singup = false;
 $notes = false;
+$username = false;
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];  
+}
 
 switch ($uri) {
     case '/notesapp/':
@@ -25,7 +30,7 @@ switch ($uri) {
 
 echo "
 <nav class='navbar navbar-expand-lg navbar-dark bg-dark'>
-<a class='navbar-brand' href='#'>Notes</a>
+<a class='navbar-brand' href='/notesapp'>Notes</a>
 <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-controls='navbarSupportedContent' aria-expanded='false' aria-label='Toggle navigation'>
     <span class='navbar-toggler-icon'></span>
 </button>
@@ -56,6 +61,12 @@ echo "
         }
     echo "
     </ul>
+    <div>";
+      if($username) {
+        echo "<h5 class = 'mr-3 font-weight-light'>$username</h5>";
+      }
+    echo "
+    </div>
 </div>
 </nav>
 ";
