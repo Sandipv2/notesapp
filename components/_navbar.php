@@ -39,7 +39,7 @@ echo "
     <ul class='navbar-nav mr-auto'>
         
         <li class='nav-item ";if($home){echo "active";}echo"'>
-         <a class='nav-link' href='/notesapp'>Home <span class='sr-only'>(current)</span></a>
+         <a class='nav-link' href='/notesapp'>HOME <span class='sr-only'>(current)</span></a>
         </li>";
         if(!isset($_SESSION['username'])) {
             echo "
@@ -53,7 +53,7 @@ echo "
         }
         else if(isset($_SESSION['username']) && $_SESSION['username'] != "") {
             echo "<li class='nav-item'>
-                <a class='nav-link ";if($notes){echo "active";}echo "' href='/notesapp/notes.php'>Notes</a>
+                <a class='nav-link ";if($notes){echo "active";}echo "' href='/notesapp/notes.php'>NOTES</a>
             </li>
             <li class='nav-item'>
                 <a class='nav-link' href='/notesapp/logout.php'>LOG OUT</a>
