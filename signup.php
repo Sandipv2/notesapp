@@ -19,9 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = "Username Already Exists!";
         } else {
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
             $sql = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
+
+            $create_table = "CREATE TABLE $username (
+                notes_id INT PRIMARY KEY AUTO_INCREMENT, 
+                title VARCHAR(50), 
+                description TEXT, 
+                time TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
+
             $result = mysqli_query($conn, $sql);
-            if ($result) {
+            $result_table = mysqli_query($conn, $create_table);
+
+            if ($result && $result_table) {
                 $show_msg = "Account created!";
             }
         }
