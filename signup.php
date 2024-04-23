@@ -33,6 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             if ($result && $result_table) {
                 $show_msg = "Account created!";
+                session_start();
+                $_SESSION["username"] = $username;
+                header("location:notes.php");
             }
         }
     }

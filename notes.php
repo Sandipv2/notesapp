@@ -23,21 +23,21 @@ if (isset($_GET['delete'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['editId'] != "") {
-        $id = $_POST['editId'];
-        $title = $_POST['title'];
-        $description = $_POST['description'];
+        $id = (int)$_POST['editId'];
+        $title = mysqli_real_escape_string($conn, $_POST['title']);
+        $description = mysqli_real_escape_string($conn, $_POST['description']);
 
-        $sql = "UPDATE $logined_user SET title = '$title' , description = '$description' WHERE id = '$id'";
+        $sql = "UPDATE $logined_user SET title = '$title' , description = '$description' WHERE notes_id = '$id'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
             $update = true;
         } else {
             echo "" . $_POST['editId'];
-            echo "Updation failed!";
+            echo "Updation failed! => ".mysqli_error($conn);
         }
     } else {
-        $title = $_POST['title'];
-        $description = $_POST['description'];
+        $title = mysqli_real_escape_string($conn, $_POST['title']);
+        $description = mysqli_real_escape_string($conn, $_POST['description']);
 
         $sql = "INSERT INTO $logined_user (title, description) VALUES ('$title', '$description')";
         $result = mysqli_query($conn, $sql);
@@ -46,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $insert = true;
         } else {
             echo "The data din't inserted! " . mysqli_error($conn);
-            echo "name ==>".$username;
         }
     }
 }
