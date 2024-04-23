@@ -5,10 +5,8 @@ if (!isset($_SESSION["username"])) {
     header("location: login.php");
 }
 
-// chekc if blocked;
-if (isset($_COOKIE['isBlock'])) {
-    die(readfile("blockHome.html"));
-}
+$logined_user = $_SESSION['username'];
+
 $insert = false;
 $update = false;
 $delete = false;
@@ -18,7 +16,7 @@ require "_dbconnect.php";
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $delete = true;
-    $sql = "DELETE FROM `notes` WHERE `id` = $id";
+    $sql = "DELETE FROM $logined_user WHERE `notes_id` = $id";
     $result = mysqli_query($conn, $sql);
     header("location:notes.php");
 }
@@ -29,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $title = $_POST['title'];
         $description = $_POST['description'];
 
-        $sql = "UPDATE notes SET title = '$title' , description = '$description' WHERE id = '$id'";
+        $sql = "UPDATE $logined_user SET title = '$title' , description = '$description' WHERE id = '$id'";
         $result = mysqli_query($conn, $sql);
         if ($result) {
             $update = true;
@@ -41,13 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $title = $_POST['title'];
         $description = $_POST['description'];
 
-        $sql = "INSERT INTO notes (title, description) VALUES ('$title', '$description')";
+        $sql = "INSERT INTO $logined_user (title, description) VALUES ('$title', '$description')";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
             $insert = true;
         } else {
             echo "The data din't inserted! " . mysqli_error($conn);
+            echo "name ==>".$username;
         }
     }
 }
@@ -145,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <tbody>
 
                 <?php
-                $sql = "SELECT * FROM notes";
+                $sql = "SELECT * FROM $logined_user";
                 $result = mysqli_query($conn, $sql);
                 $sno = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
@@ -156,8 +155,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <td>" . $row['title'] . "</td>
                         <td>" . $row['description'] . "</td>
                         <td>" . $row['time'] . "</td>
-                        <td id='action_col'><button class='edit btn btn-outline btn-primary' id=" . $row['id'] . ">Edit</button>
-                        <button class='btn btn-outline-danger delete' id = " . $row['id'] . ">Delete</button></td>
+                        <td id='action_col'><button class='edit btn btn-outline btn-primary' id=" . $row['notes_id'] . ">Edit</button>
+                        <button class='btn btn-outline-danger delete' id = " . $row['notes_id'] . ">Delete</button></td>
                     </tr>
                 ";
                 }
