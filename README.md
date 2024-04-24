@@ -9,9 +9,10 @@ This site offers :
 
 # Technologies Used
 1. PHP 8.0.30 (Backend)
-2. Bootstrap (Frontend)
-3. JavaScript
-4. CSS
+2. MySQL ( Database )
+3. Bootstrap (Frontend)
+4. JavaScript
+5. CSS
 
 # Development Environment
 1. Windows 11 Home
