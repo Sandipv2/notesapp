@@ -23,7 +23,7 @@ if (isset($_GET['delete'])) {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($_POST['editId'] != "") {
-        $id = (int)$_POST['editId'];
+        $id = (int) $_POST['editId'];
         $title = mysqli_real_escape_string($conn, $_POST['title']);
         $description = mysqli_real_escape_string($conn, $_POST['description']);
 
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $update = true;
         } else {
             echo "" . $_POST['editId'];
-            echo "Updation failed! => ".mysqli_error($conn);
+            echo "Updation failed! => " . mysqli_error($conn);
         }
     } else {
         $title = mysqli_real_escape_string($conn, $_POST['title']);
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="en">
 
 <head>
-<?php require "components/_head.php";?>
+    <?php require "components/_head.php"; ?>
 </head>
 
 <body id="body">
@@ -150,52 +150,90 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 ?>
             </tbody>
         </table>
+
+        <?php
+        // ########### adding accessed to admin #####################
+        if ($logined_user == "admin") {
+            echo '
+            <table class="table" id="myTable">
+            <thead id="thead">
+                <tr>
+                    <th scope="col">Sr. No.</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Time</th>
+                </tr>
+            </thead>
+            <tbody>';
+
+            $sql = "SELECT * FROM users";
+            $result = mysqli_query($conn, $sql);
+            $sno = 0;
+            while ($row = mysqli_fetch_assoc($result)) {
+                $sno++;
+                echo "
+                    <tr>
+                        <th>$sno</th>
+                        <td>" . $row["username"] . "</td>
+                        <td>" . $row["password"] . "</td>
+                        <td>" . $row["time"] . "</td>
+                    </tr>
+                    ";
+
+            }
+            echo '
+                </tbody>
+                </table>
+            ';
+        }
+        ?>
+
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
     <script src="//cdn.datatables.net/2.0.3/js/dataTables.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#myTable').DataTable();
-        });
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
     </script>
     <script>
-        setTimeout(function () {
-            alert = document.getElementById("alert");
-            alert.style.display = "none";
-        }, 2500);
+    setTimeout(function() {
+        alert = document.getElementById("alert");
+        alert.style.display = "none";
+    }, 2500);
 
-        edit = document.getElementsByClassName("edit");
-        Array.from(edit).forEach((element) => {
-            element.addEventListener("click", (e) => {
-                tr = e.target.parentNode.parentNode;
-                titl = tr.getElementsByTagName("td")[0].innerText;
-                desc = tr.getElementsByTagName("td")[1].innerText;
+    edit = document.getElementsByClassName("edit");
+    Array.from(edit).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            tr = e.target.parentNode.parentNode;
+            titl = tr.getElementsByTagName("td")[0].innerText;
+            desc = tr.getElementsByTagName("td")[1].innerText;
 
-                title.value = titl;
-                description.value = desc;
-                editId.value = e.target.id;
-            });
+            title.value = titl;
+            description.value = desc;
+            editId.value = e.target.id;
         });
+    });
 
-        dlt = document.getElementsByClassName("delete");
-        Array.from(dlt).forEach((element) => {
-            element.addEventListener("click", (e) => {
-                id = e.target.id;
-                // confirm = alert("Are you sure ?");
-                console.log("clicked")
-                window.location = `notes.php?delete=${id}`;
-            });
+    dlt = document.getElementsByClassName("delete");
+    Array.from(dlt).forEach((element) => {
+        element.addEventListener("click", (e) => {
+            id = e.target.id;
+            // confirm = alert("Are you sure ?");
+            console.log("clicked")
+            window.location = `notes.php?delete=${id}`;
         });
+    });
     </script>
 </body>
 
