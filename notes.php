@@ -155,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // ########### adding accessed to admin #####################
         if ($logined_user == "admin") {
             echo '
-            <table class="table" id="myTable">
+            <table class="table">
             <thead id="thead">
                 <tr>
                     <th scope="col">Sr. No.</th>
